@@ -1,0 +1,45 @@
+service: hwsw-example
+
+provider:
+  name: aws
+  runtime: nodejs6.10
+  stage: dev
+  region: eu-west-1
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - 's3:*'
+      Resource: '*'
+
+custom:
+  storageBucketName: ${self:service}-${opt:stage, self:provider.stage}-storage
+
+functions:
+  authHandler:
+    handler: index.authHandler
+    cors: true
+    environment:
+      AUTH_SECRET: ${file(.env.json):AUTH_SECRET}
+  signedUrlHandler:
+    handler: index.signedUrlHandler
+    environment:
+      STORAGE_BUCKET: ${self:custom.storageBucketName}
+    events:
+      - http:
+          path: geturl
+          method: POST
+          authorizer: authHandler
+          cors: true
+
+resources:
+  Resources:
+    StorageS3Bucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: ${self:custom.storageBucketName}
+        CorsConfiguration:
+          CorsRules:
+            - AllowedHeaders: ['*']
+              AllowedMethods: ['GET']
+              MaxAge: 3000
+              AllowedOrigins: ['*']

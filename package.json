@@ -1,0 +1,30 @@
+{
+  "name": "hwsw-serverless-example",
+  "version": "1.0.0",
+  "description": "Serverless example for HWSW conference",
+  "main": "index.js",
+  "scripts": {
+    "test": "eslint handlers/*.js",
+    "deploy": "yarn sls deploy",
+    "generateToken": "node utils/createToken"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leetm4n/hwsw-serverless-example.git"
+  },
+  "author": "Peter Esztari",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/leetm4n/hwsw-serverless-example/issues"
+  },
+  "homepage": "https://github.com/leetm4n/hwsw-serverless-example#readme",
+  "dependencies": {
+    "jsonwebtoken": "^8.1.0",
+    "serverless": "^1.24.1"
+  },
+  "devDependencies": {
+    "eslint": "^4.12.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.8.0"
+  }
+}
