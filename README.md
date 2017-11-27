@@ -1,7 +1,7 @@
 # hwsw-serverless-example
 
-Small serverless example which has authentication and s3 signedUrl set / get logic.
-Routes:
+A serverless example with custom lambda authentication on API Gateway triggered lambda.
+To get signed url use the following route:
  - POST {baseUrl}/geturl?type=get or {baseUrl}/geturl?type=set
 
 ### Environment variable needed (.env.json in root): 
